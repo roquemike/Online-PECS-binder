@@ -1,0 +1,106 @@
+
+
+            <div class="faded_green">
+
+                <div class="flexbox">
+                    <div>
+                        <div id="first_in" class="active_pecs flex_item PECS box_shadow">
+                                <div><img class="PECS_pic" src="static/FIRST.jpg"></div>
+                                <div>&nbsp;</div>
+                        </div>
+                        <h1 class="FT">FIRST</h1>
+                    </div>
+
+                    <div class="flex_item">
+                            <div><h1 class="FT"> ... </h1></div>
+                    </div>
+
+                    <div>
+                        <div id="then_in" class="inactive_pecs flex_item PECS box_shadow">
+                            <div><img class="PECS_pic" src="static/THEN.jpg"></div>
+                            <div>&nbsp;</div>
+                        </div>
+                        <h1 class="FT">THEN</h1>
+                    </div>
+
+                    <div class="flex_item"></div>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <audio id="play1" src="static/audio/first.mp3"></audio>
+                                <audio id="play1_1" class="active_audio" src="static/audio/non.mp3"></audio>
+                                <audio id="play2" src="static/audio/then.mp3"></audio>
+                                <audio id="play2_2" src="static/audio/non.mp3"></audio>
+
+                                <audio id="playFirst" src="static/audio/first.mp3"></audio>
+                                <audio id="playFirstPECS" class="active_audio" src="static/audio/non.mp3"></audio>
+                                <audio id="playThen" src="static/audio/then.mp3"></audio>
+                                <audio id="playThenPECS" src="static/audio/non.mp3"></audio>
+
+                                <button class="btn_play" type="button" onclick="play_first_then()"><img class="play" alt="play" src="static/play.png"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn_play" type="button" onclick="re_set()"><img class="reset" alt="reset" src="static/reset.png"></button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+
+            <script>
+                //
+                $('#first_in').click(function(){
+                    $('#first_in').addClass('active_pecs')
+                    $("#then_in").removeClass('active_pecs')
+                    $('#play1_1').addClass('active_audio')
+                    $('#play2_2').removeClass('active_audio')
+                    $('#playFirstPECS').addClass('active_audio')
+                    $('#playThenPECS').removeClass('active_audio')
+                });
+                //
+                $('#then_in').click(function(){
+                    $('#first_in').removeClass('active_pecs')
+                    $("#then_in").addClass('active_pecs')
+                    $('#play1_1').removeClass('active_audio')
+                    $('#play2_2').addClass('active_audio')
+                    $('#playFirstPECS').removeClass('active_audio')
+                    $('#playThenPECS').addClass('active_audio')
+                });
+                //
+                $('#first_in').click(function(){
+                    $('#play1')[0].play();
+                    $('#play1').on('ended', function(){
+                        $('#play1_1')[0].play();
+                    });
+                });
+                //
+                $('#then_in').click(function(){
+                    $('#play2')[0].play();
+                    $('#play2').on('ended', function(){
+                        $('#play2_2')[0].play();
+                    });
+                });
+                //
+                function play_first_then(){
+                    $('#playFirst')[0].play();
+                    $('#playFirst').on('ended', function(){
+                        $('#playFirstPECS')[0].play();
+                    });
+                    $('#playFirstPECS').on('ended', function(){
+                        $('#playThen')[0].play();
+                    });
+                    $('#playThen').on('ended', function(){
+                        $('#playThenPECS')[0].play();
+                    });
+                }
+
+                function re_set(){
+                    $('#load_strip').load('/firstthen');
+                }
+
+            </script>

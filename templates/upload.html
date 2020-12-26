@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Upload
+{% endblock %}
+
+{% block main %}
+
+    <div class="center_column">
+        <div class="center_column faded_blue width50">
+            <h4>UPLOAD</h4>
+            The PECS you upload will only be available to you.
+            <br>&nbsp;
+            <form method="post" action="/upload" enctype="multipart/form-data">
+        			<div class="form-inline form-group">
+        			    <input type="file" name="file" autocomplete="off" required>
+        			</div>
+
+                <div class="form-inline form-group">
+
+
+                    <input class="form-control" type="text" name="desc" placeholder="description*" autocomplete="off">
+                    &nbsp;
+
+                    <!--
+                    <input autocomplete="off" list="PECS" id="tag" class="form-control" name="tag" type="text">
+                    <datalist id="PECS">
+                        <option value="favourites">Favourites</option>
+                        {% for i in range(tags | length) %}
+                        <option value="{{ tags[i] }}">{{ tags[i] }}</option>
+                        {% endfor %}
+                    </datalist>
+                    -->
+
+                    <select class="form-control" id="tag" name="tag" placeholder="tags" required>
+
+                        <option value="tags" selected disabled>tags</option>
+                        {% for i in range(tags | length) %}
+                        <option value="{{ tags[i] }}">{{ tags[i] }}</option>
+                        {% endfor %}
+                    </select>
+
+                    &nbsp;
+                    <button id="upload" class="btn btn-dark" type="submit">Submit</button>
+                </div>
+                *Description will be the text that is read back when selected in the binder.
+                <br>
+
+            </form>
+
+            {% if filename %}
+                <br>upload successful.<br>
+                <img src="static/uploads/{{ filename }}">
+                <br>description: {{ desc }}
+                <br>tags: {{ tag }}
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function(){
+            $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+            $('#upload').parent().removeClass('nav-item').addClass('nav-item active')
+        });
+
+    </script>
+
+
+{% endblock %}

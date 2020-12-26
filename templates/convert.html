@@ -1,0 +1,19 @@
+
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <div class="center_column">
+        <div class="center_column faded_blue width80">
+            <h4>CONVERT</h4>
+            This Function is for admin use only.
+            <form action="/convert" method="post">
+              <input type="text" name="text">
+              <input type="img_id" name="img_id">
+              <input type="submit" Value="Submit">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+

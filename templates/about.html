@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block main %}
+
+    <div class="center_column">
+        <h1 class="display-5">Online PECS binder</h1>
+
+        <div class="faded_blue">
+            <h5>Hello and Welcome to the Online PECS Binder!</h5>
+
+            <div class="clearfix">
+                <div class="float_right">
+                    <img style="width: 280px; margin: 10px; border: 1px solid black;" src="static/PECS_binder_3.JPG" alt="PECS Binder">
+                    <p style="margin-left: 10px">
+                        A PECS Binder using an "I want" picture
+                    </p>
+                </div>
+
+                <img class="float_left" style="width: 150px; border: 1px solid black; margin: 10px" src="static/hello.JPG" alt="PECS">
+
+                <p style="padding: 10px">
+                    PECS stands for Picture Exchange Communication System.
+                    <br>The PECS helps anyone with communication challenges, such as persons with Autism, communicate through the exchange of pictures.
+                    <br>The pictures which make up the vocublary of the individual are collected in a binder and the pictures are "exchanged"
+                </p>
+
+                <p style="padding: 10px">
+                    PECS have different phases and The Online Binder is designed for use in the 4th Phase,
+                    <br>where we are able to use an “I want” picture followed by a picture of the item being requested.
+                    <br>Learn more about PECS from Pyramid Educational Consultants who developed the PECS -
+                    <br><a href="https://pecs.com/picture-exchange-communication-system-pecs/">https://pecs.com/picture-exchange-communication-system-pecs/</a>
+                </p>
+
+                <p>
+                    <h5>Register for additional features!</h5>
+                    The Application is free for use without the need to register.
+                    <br>But if you register, you will get all these neat features:
+                    <ul>
+                        <li>Upload personalized PECS only available to you</li>
+                        <li>Tag PECS to a personalized favorite tab for easy access</li>
+                    </ul>
+                </p>
+
+                <p>
+                    <h5>Resources</h5>
+                    The applications used free images available in the internet for PECS.
+                </p>
+
+            </div>
+
+            <div>
+                <p>
+                    <h5></h5>
+                    This application is created for the CS50x Final Project.
+                    <br>For Comments or Suggestions please contact:
+                    <ul>
+                        <li>email: polar.burr09@gmail.com</li>
+                        <li>discord: polarburr#9201</li>
+                    </ul>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+        <script>
+
+            $(document).ready(function(){
+                $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+                $('#about').parent().removeClass('nav-item').addClass('nav-item active')
+            });
+
+        </script>
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Manage Favourites
+{% endblock %}
+
+{% block main %}
+
+    <div class="center_column">
+        <div class="center_column faded_blue width100">
+            <h4>MANAGE FAVOURITES</h4>
+            <form action="/fave" method="post">
+                <button id="clear_fave" class="btn btn-info" style="float: right" type="submit">Clear Faves</button>
+            </form>
+            Showing All PECS in Alphabetical order.
+            <br>Click the Star to Add / Remove PECS in Favourites:
+
+            <div class="faded_yellow flexbox scroll">
+                {% for PECS in images %}
+                    <div id="PECS_{{ PECS.id }}" class="PECS flex_item box_shadow">
+                        <div><img class="PECS_pic" src="static/uploads/{{ PECS.name }}"></div>
+                        <center>
+                            {% if tags %}
+                                    {% if PECS.id in tags %}
+                                    <button  id="fav_{{ PECS.id }}" type="button" name="{{ PECS.id }}" class="btn_play"><img style= "height: 30px;" src="static/ff.jpg"></button>
+                                    {% else %}
+                                    <button  id="fav_{{ PECS.id }}" type="button" name="{{ PECS.id }}" class="btn_play"><img style= "height: 30px;" src="static/fa.jpg"></button>
+                                    {% endif %}
+
+                            {% else %}
+                                    <button  id="fav_{{ PECS.id }}" type="button" name="{{ PECS.id }}" class="btn_play"><img style= "height: 30px;" src="static/fa.jpg"></button>
+                            {% endif %}
+                        </center>
+                        <div>{{ PECS.desc | upper }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            Dont see a PECS you need? <a href="/upload">UPLOAD</a> your own PECS!
+            <br>note: Your uploaded PECS will only be available to you!
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function(){
+            $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+            $('#fave').parent().removeClass('nav-item').addClass('nav-item active')
+        });
+
+        $("[id^='fav_']").click(function(){
+
+            if ($(this).children().attr('src') == "static/fa.jpg"){
+                $(this).children().attr('src', "static/ff.jpg" )
+                $.post("/fave", {
+                    id: $(this).attr('name'),
+                    fav: "add"
+                });
+            }
+            else{
+                $(this).children().attr('src', "static/fa.jpg" )
+                $.post("/fave", {
+                    id: $(this).attr('name'),
+                    fav: "rem"
+                });
+            }
+        });
+
+    </script>
+
+{% endblock %}

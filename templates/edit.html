@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block main %}
+
+    <div class="center_column">
+        <div class="center_column faded_blue width100">
+            <h4>EDIT</h4>
+
+            {% if PECS_db %}
+
+            Choose a PECS to edit:
+            <div class="faded_yellow flexbox scroll">
+                {% for PECS in PECS_db %}
+                    <div id="PECS_{{ PECS.id }}" class="PECS flex_item box_shadow" style="min-width: 150px">
+                        <div><img class="PECS_pic" src="static/uploads/{{ PECS.name }}"></div>
+                            <center>
+                                <button id="del_{{ PECS.id }}" type="button" name="{{ PECS.id }}" class="btn_play"><img style="height: 30px;" src="static/delete.jpg"></button>
+                            </center>
+                        <div id="PECS_desc_{{ PECS.id }}"><input style="text-align: center; border: none; outline: none" name="{{ PECS.id }}" size="10" type="text" value="{{ PECS.desc | upper }}" disabled></div>
+                        <div id="PECS_tag_{{ PECS.id }}">
+                            <select style="outline: none;" name="{{ PECS.id }}">
+                                {% for i in range(tags | length) %}
+                                    {% if tags[i] == PECS.tag %}
+                                        <option value="{{ tags[i] }}" selected>{{ tags[i] }}</option>
+                                    {% else %}
+                                        <option value="{{ tags[i] }}">{{ tags[i] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% else %}
+
+                <h5>OOPS! NO PECS TO MANAGE.</h5>
+                <img src="static/idk.jpg" alt="dont know">
+                <br>Please go to <a href="/upload">UPLOAD</a> to upload some PECS.
+
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function(){
+            $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+            $('#edit').parent().removeClass('nav-item').addClass('nav-item active')
+        });
+
+        //$("[id^='PECS_']").click(function(){
+        //    $('.active_pecs').html($(this).html());
+        //    text = $(this).find('input').val();
+        //});
+        $("[id^='PECS_desc_']").click(function(){
+            $(this).find('input').prop('disabled', false);
+        });
+
+        $("[id^='PECS_desc_']").focusout(function(){
+            $(this).find('input').prop('disabled', true);
+        });
+
+        $("[id^='PECS_desc_']").change(function(){
+            $.post("/edit", {
+                    id: $(this).find('input').attr('name'),
+                    desc: $(this).find('input').val()
+                }
+                )
+        });
+
+        $("[id^='PECS_tag_']").change(function(){
+            $.post("/edit", {
+                    id: $(this).find('select').attr('name'),
+                    tag: $(this).find('select').val()
+                }
+                )
+        });
+
+        $("[id^='del_']").click(function(){
+
+            $(this).closest('div').hide()
+            $.post("/edit", {
+                    id: $(this).attr('name'),
+                    del: "delete"
+                }
+                )
+        });
+
+
+    </script>
+
+{% endblock %}

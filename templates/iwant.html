@@ -1,0 +1,56 @@
+
+            <div class="faded_green">
+                <div class="flexbox">
+
+                    <div id="iwant_div" class="PECS flex_item box_shadow">
+                        <div><img class="PECS_pic"src="static/i_want.jpg"></div>
+                        <div>I WANT</div>
+                    </div>
+
+                    <div id="iwant_pecs" class="active_pecs flex_item PECS box_shadow">
+                            <div><img class="PECS_pic" src="static/uploads/white.jpg"></div>
+                            <div></div>
+                    </div>
+
+                    <div class="flex_item"></div>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <audio id="play1" src="static/audio/I want.mp3"></audio>
+                                <audio id="play2" class="active_audio" src="static/audio/non.mp3"></audio>
+                                <button class="btn_play" type="button" onclick="play_iwant()"><img class="play" alt="play" src="static/play.png"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn_play" type="button" onclick="re_set()"><img class="reset" alt="reset" src="static/reset.png"></button>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+            <script>
+                function play_iwant(){
+                    $('#play1')[0].play();
+                    $('#play1').on('ended', function(){
+                        $('#play2')[0].play();
+                    });
+                }
+
+                $('#iwant_div').click(function(){
+                    $('#play1')[0].play();
+                });
+
+                $('#iwant_pecs').click(function(){
+                    $('#play2')[0].play();
+                });
+
+                function re_set(){
+                    $('#load_strip').load('/iwant');
+                }
+
+            </script>
+

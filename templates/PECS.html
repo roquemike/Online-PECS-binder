@@ -1,0 +1,53 @@
+
+
+                <div class="faded_yellow flexbox scroll">
+                    {% for PECS in images %}
+                        <div id="PECS_{{ PECS.id }}" class="PECS flex_item box_shadow">
+                            <div style="text-align: center"><img class="PECS_pic" src="static/uploads/{{ PECS.name }}"></div>
+                            <div style="text-align: center; margin-left: -10px; padding: 0; overflow: hidden;">{{ PECS.desc | upper }}</div>
+                            <input name="PECS_desc_{{ PECS.id }}" type="text" value="{{ PECS.id }}" hidden disabled>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <!--
+                <div>
+                    <br><br><br><br><br><br><br>
+                    <form onsubmit="return false">
+                        <div class="form-group">
+                            <input autocomplete="off" autofocus class="form-control" id="text" name="text" placeholder="Text" type="text">
+                        </div>
+                        <button class="btn btn-primary" id="convert" type="submit">Search</button>
+                    </form>
+                </div>
+                -->
+
+
+                <!--
+                <audio id="playah" controls>
+                <source id="play_me" src="/static/Iwant.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio>
+                -->
+
+                <script>
+
+                $("[id^='PECS_']").click(function(){
+                    $('.active_pecs').html($(this).html());
+                    text = $(this).find('input').val();
+                    source="static/audio/" + text + ".mp3"
+                    $('.active_audio').attr('src', source);
+                    $('.active_audio')[0].play();
+
+                    if ($('#first_in').hasClass('active_pecs'))
+                    {
+                        $('#first_in').removeClass('active_pecs')
+                        $("#then_in").addClass('active_pecs')
+                        $('#play1_1').removeClass('active_audio')
+                        $('#play2_2').addClass('active_audio')
+                        $('#playFirstPECS').removeClass('active_audio')
+                        $('#playThenPECS').addClass('active_audio')
+                    }
+                });
+                </script>

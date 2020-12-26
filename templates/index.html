@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    PECS Strip
+{% endblock %}
+
+{% block main %}
+
+        <div class="center_column faded_blue box_shadow" style="margin-top: -6px">
+
+            <button id="iwant" class="active_strip">I WANT </button>
+            <button id="firstthen" class="strip">FIRST... THEN</button>
+
+            <div id="load_strip"></div>
+
+            <div style="clear:both">
+                <br>
+
+                {% for i in range(tags | length) %}
+                    {% if tags[i] == "favourites" %}
+                        <button id="CAT_{{ i }}" class="cat" type="button" value="{{ tags[i] }}"><span style="color: yellow">&#9733</span>&nbsp;{{ tags[i] }}</button>
+                    {% else %}
+                        <button id="CAT_{{ i }}" class="cat" type="button" value="{{ tags[i] }}">{{ tags[i] }}</button>
+                    {% endif %}
+                {% endfor %}
+
+                <!--
+                    <div>
+                        <input type="text" placeholder="search">
+                        <button>search</button>
+                    </div>
+                -->
+
+                <div id = "load_cat"></div>
+
+            </div>
+        </div>
+
+        <script>
+            //this function loads initially the "I WANT" Strip.
+            $(document).ready(function(){
+                $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+                $('#home').parent().removeClass('nav-item').addClass('nav-item active')
+
+                $('#load_cat').load('/PECS');
+                $('#CAT_0').removeClass('cat').addClass('active_cat');
+                $('#load_strip').load('/iwant');
+            });
+            //function that catches clicks on Category or Tag Tabs
+            //then loads the PECS of the active tag or category.
+            $("[id^='CAT_']").click(function(){
+                $('#load_cat').load('/PECS?cat=' + $(this).val());
+                $("[id^='CAT_']").removeClass('active_cat').addClass('cat');
+                $(this).removeClass('cat').addClass('active_cat');
+            });
+            //catches clicks to the I WANT strip tab
+            $("#iwant").click(function(){
+                $('#load_strip').load('/iwant');
+                $('#iwant').removeClass('strip').addClass('active_strip');
+                $('#firstthen').removeClass('active_strip').addClass('strip');
+            });
+            //catches clicks to the FIRST..THEN strip tab
+            $("#firstthen").click(function(){
+                $('#load_strip').load('/firstthen');
+                $('#firstthen').removeClass('strip').addClass('active_strip');
+                $('#iwant').removeClass('active_strip').addClass('strip');
+            });
+
+            //function load_cat(cat){
+            //    $.post("/PECS",
+            //    {
+            //        cat: cat
+            //    }
+            //    )
+            //$('#load_cat').load('/PECS');
+            //};
+        </script>
+
+{% endblock %}

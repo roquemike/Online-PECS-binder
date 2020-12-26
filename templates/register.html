@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <div class="center_column">
+        <div>
+            <div class="column_left float_left faded_blue width80">
+                <h4>Register</h4>
+                <form action="/register" method="post">
+                    <div class="form-inline form-group">
+                        <input autocomplete="off" autofocus class="form-control col-sx-2" id="username" name="username" placeholder="Username" type="text">&nbsp;
+                        <span class="uname_check"></span>
+                    </div>
+                    <div class="form-inline form-group">
+                        <input class="form-control" id="password" name="password" placeholder="Password" type="password" disabled>&nbsp;
+                        <span class="pass1_check"></span>
+                    </div>
+                    <div class="form-inline form-group">
+                        <input class="form-control" id="confirmation" name="confirmation" placeholder="Re-type Password" type="password" disabled>&nbsp;
+                        <span class="pass2_check"></span>
+                    </div>
+                    <button class="btn btn-dark" id="bt_register" type="submit" disabled>Submit</button>
+                </form>
+            </div>
+
+            <div class="column_right float_left faded_green width80">
+                <h4>Validation Checks:</h4>
+                <h5>Usernames</h5>
+                <ul>
+                    <li>Must be at least 3 characters.</li>
+                    <li>Not yet taken.</li>
+                </ul>
+                <h5>Password Validation</h5>
+                <ul>
+                    <li>8-20 characters</li>
+                    <li>A lower case letter</li>
+                    <li>An upper case letter</li>
+                    <li>A number</li>
+                    <li>A special character</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+   </div>
+
+    <script>
+
+        $(document).ready(function(){
+            $('.nav-item').removeClass('nav-item active').addClass('nav-item')
+            $('#bt_register').parent().removeClass('nav-item').addClass('nav-item active')
+        });
+
+        $('#username').keyup(function(){
+
+        if($('#username').val() == ''){
+            $('.uname_check').html("");
+        }
+
+        if ($('#username').val().length > 2){
+
+        {% if db_username %}
+
+            {% for row in db_username %}
+            if ($('#username').val().toUpperCase() === "{{ row['username'].upper() }}"){
+                $('.uname_check').html("&#10060;" + " Taken");
+                reset_form();
+                return false;
+            }
+
+            {% endfor %}
+
+            else{
+                $('.uname_check').html("&#10004;");
+                $('#password').prop('disabled', false);
+            }
+
+        {% else %}
+
+            $('.uname_check').html("&#10004;");
+            $('#password').prop('disabled', false);
+
+
+        {% endif %}
+
+        }
+        else{
+            $('.uname_check').html("&#10060;" + "short");
+            reset_form();
+        }
+
+        });
+
+
+        // Regular expression taken from:
+        //https://techmindseye.com/password-validation-in-jquery-using-regex/
+
+        $('#password').keyup(function(){
+            if($('#password').val().match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/)){
+                $('.pass1_check').html("&#10004;");
+                $('#confirmation').prop('disabled', false);
+            }
+            else{
+                $('.pass1_check').html("&#10060;");
+                reset_confirm();
+            }
+        });
+
+        $('#confirmation').keyup(function(){
+            if($('#password').val() == $('#confirmation').val()){
+                $('.pass2_check').html("&#10004;");
+                $('#bt_register').prop('disabled',false);
+            }
+            else{
+                $('.pass2_check').html("&#10060;");
+                $('#bt_register').prop('disabled',true);
+            }
+
+        });
+
+        function reset_form(){
+            $('#password').prop('disabled', true);
+            $('#confirmation').prop('disabled', true);
+            $('#bt_register').prop('disabled',true);
+            $('#password').val("");
+            $('#confirmation').val("");
+            $('.pass1_check').html("");
+            $('.pass2_check').html("");
+        }
+
+        function reset_confirm(){
+            $('#confirmation').prop('disabled', true);
+            $('#bt_register').prop('disabled',true);
+            $('#confirmation').val("");
+            $('.pass2_check').html("");
+        }
+
+    </script>
+
+{% endblock %}
