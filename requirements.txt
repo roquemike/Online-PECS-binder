@@ -1,4 +1,5 @@
 gunicorn
+redis
 psycopg2
 Flask
 Flask-Session
