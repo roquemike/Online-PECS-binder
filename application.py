@@ -31,8 +31,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Open Database File
-db = SQL("sqlite:///binder.db")
-
+#db = SQL("sqlite:///binder.db")
+db = SQL(os.getenv("binder.db"))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
