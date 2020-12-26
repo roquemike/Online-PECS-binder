@@ -1,5 +1,3 @@
-import os.path
-import requests
 
 from flask import redirect, render_template, request, session
 from gtts import gTTS
