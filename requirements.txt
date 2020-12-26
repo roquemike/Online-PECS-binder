@@ -1,7 +1,6 @@
 gunicorn
 psycopg2
-Python==3.7.9
-Flask==1.1.2
+Flask==1.1.1
 Jinja2==2.6
 Werkzeug==1.0.1
 gTTs
