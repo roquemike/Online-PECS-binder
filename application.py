@@ -1,5 +1,6 @@
 import os
 import time
+import redis
 
 from cs50 import SQL
 
@@ -11,6 +12,9 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from functions import login_required, convert_speech
+
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+redis = redis.from_url(redis_url)
 
 UPLOAD_FOLDER = 'static/uploads/'
 
