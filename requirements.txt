@@ -1,6 +1,6 @@
 gunicorn
 psycopg2
-Flask==1.1.2
-Flask-Session==0.3.2
-gTTS==2.2.1
-cs50==6.0.2
+Flask
+Flask-Session
+gTTS
+cs50
