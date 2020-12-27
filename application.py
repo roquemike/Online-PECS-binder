@@ -1,11 +1,11 @@
 import os
 import time
-import redis
 
 from cs50 import SQL
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
+#import redis
 
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -13,8 +13,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from functions import login_required, convert_speech
 
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-redis = redis.from_url(redis_url)
+#redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+#redis = redis.from_url(redis_url)
 
 UPLOAD_FOLDER = 'static/uploads/'
 
@@ -29,7 +29,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SECRET_KEY"] = "$H:eDQ~hSd0'y,X.]!~bSBE8%xGhP%"
+app.secret_key = "$H:eDQ~hSd0'y,X.]!~bSBE8%xGhP%"
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
