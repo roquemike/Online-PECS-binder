@@ -41,6 +41,9 @@ Session(app)
 #db = SQL("sqlite:///binder.db")
 db = SQL(os.getenv("DATABASE_URL"))
 
+##https://stackoverflow.com/questions/45887266/flask-session-how-to-create-the-session-table
+session.app.session_interface.db.create_all()
+
 @app.route("/", methods=["GET", "POST"])
 def index():
 
