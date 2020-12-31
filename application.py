@@ -30,10 +30,12 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-# Configure session to use filesystem (instead of signed cookies)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.secret_key = "$H:eDQ~hSd0'y,X.]!~bSBE8%xGhP%"
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
+
+# Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_TYPE"] = "sqlalchemy"
 Session(app)
 
