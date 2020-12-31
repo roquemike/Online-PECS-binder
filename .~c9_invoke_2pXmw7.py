@@ -1,7 +1,7 @@
 import os
 import time
 
-#from cs50 import SQL
+from cs50 import SQL
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
@@ -34,7 +34,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.secret_key = "$H:eDQ~hSd0'y,X.]!~bSBE8%xGhP%"
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config["SESSION_TYPE"] = "sqla"
 Session(app)
 
 # Open Database File
