@@ -4,7 +4,9 @@ import time
 from cs50 import SQL
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
-from flask_session import Session
+##https://github.com/mcrowson/flask-sessionstore
+from flask_sessionstore import Session
+#from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 #import redis
 

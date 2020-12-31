@@ -3,6 +3,7 @@ redis
 psycopg2
 Flask
 Flask-Session
+flask-sessionstore
 Flask-Redis
 Flask-SQLAlchemy
 gTTS
