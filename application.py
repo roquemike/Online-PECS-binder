@@ -6,7 +6,7 @@ from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 ##https://github.com/mcrowson/flask-sessionstore
 from flask_session import Session
-import redis
+#import redis
 
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -36,7 +36,7 @@ app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_TYPE"] = "redis"
+app.config["SESSION_TYPE"] = "filename"
 Session(app)
 
 # Open Database File
