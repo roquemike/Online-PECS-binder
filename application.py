@@ -5,6 +5,7 @@ from cs50 import SQL
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
 #import redis
 
 from tempfile import mkdtemp
@@ -37,6 +38,9 @@ app.config["SESSION_PERMANENT"] = False
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config[SESSION_SQLALCHEMY_TABLE] = 'sessions'
+app.config[SESSION_SQLALCHEMY] = db
+
 Session(app)
 
 # Open Database File
