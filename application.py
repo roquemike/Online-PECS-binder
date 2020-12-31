@@ -38,9 +38,6 @@ app.config["SESSION_PERMANENT"] = False
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_TYPE"] = "sqlalchemy"
-app.config["SESSION_SQLALCHEMY_TABLE"] = 'sessions'
-app.config["SESSION_SQLALCHEMY"] = db
-
 Session(app)
 
 # Open Database File
