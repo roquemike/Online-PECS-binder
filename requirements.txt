@@ -4,5 +4,6 @@ psycopg2
 Flask
 Flask-Session
 Flask-Redis
+Flask-SQLAlchemy
 gTTS
 cs50
