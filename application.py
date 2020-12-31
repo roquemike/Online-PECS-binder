@@ -5,10 +5,8 @@ from cs50 import SQL
 
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 ##https://github.com/mcrowson/flask-sessionstore
-from flask_sessionstore import Session
-#from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
-#import redis
+from flask_session import Session
+import redis
 
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -33,13 +31,12 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.secret_key = "$H:eDQ~hSd0'y,X.]!~bSBE8%xGhP%"
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config["SESSION_TYPE"] = "redis"
 Session(app)
 
 # Open Database File
@@ -47,7 +44,7 @@ Session(app)
 db = SQL(os.getenv("DATABASE_URL"))
 
 ##https://stackoverflow.com/questions/45887266/flask-session-how-to-create-the-session-table
-session.app.session_interface.db.create_all()
+#session.app.session_interface.db.create_all()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
