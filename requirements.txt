@@ -3,5 +3,6 @@ redis
 psycopg2
 Flask
 Flask-Session
+Flask-Redis
 gTTS
 cs50
